@@ -1,0 +1,23 @@
+services:
+  storage:
+    build:
+      context: .
+      dockerfile: Storage/Dockerfile
+    ports:
+      - "5000:5000"
+  baker:
+    build: 
+      context: .
+      dockerfile: Baker/Dockerfile
+    environment:
+      STORAGE_URL: http://storage:5000/simplerpc
+    depends_on:
+      - storage
+  farmer:
+    build: 
+      context: .
+      dockerfile: Farmer/Dockerfile
+    environment:
+      STORAGE_URL: http://storage:5000/simplerpc
+    depends_on:
+      - storage
