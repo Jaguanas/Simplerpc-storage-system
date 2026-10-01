@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: farmer
+  namespace: simplerpc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: farmer
+  template:
+    metadata:
+      labels:
+        app: farmer
+    spec:
+      containers:
+        - name: farmer
+          image: jaguanas/simplerpc-farmer:0.1.0
+          env:
+            - name: STORAGE_URL
+              value: http://storage:5000/simplerpc

@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: baker
+  namespace: simplerpc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: baker
+  template:
+    metadata:
+      labels:
+        app: baker
+    spec:
+      containers:
+        - name: baker
+          image: jaguanas/simplerpc-baker:0.1.0
+          env:
+            - name: STORAGE_URL
+              value: http://storage:5000/simplerpc
