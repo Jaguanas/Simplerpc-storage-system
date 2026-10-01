@@ -158,12 +158,11 @@ terraform destroy
 
 Currently supported:
 - Native .NET execution
-- Individual Docker images
-- Docker network communication
+- Docker image builds for individual services
+- Docker networking between containers
 - Docker Compose orchestration
-- Publish images to Docker Hub
-- Deploy to Kubernetes
-- Manage Kubernetes resources with Terraform
+- Deployment to Kubernetes
+- Kubernetes resource management with Terraform
 
 ## License
 
