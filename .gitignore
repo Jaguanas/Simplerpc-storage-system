@@ -3,4 +3,6 @@ bin/
 obj/
 .vs/
 links.txt
-
+.terraform/
+*.tfstate
+*.tfstate.*

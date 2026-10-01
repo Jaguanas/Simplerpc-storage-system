@@ -64,6 +64,96 @@ Inside the Docker network, clients connect to Storage using:
 http://storage:5000/simplerpc
 ```
 
+## Run with Kubernetes
+
+Create local cluster:
+```bash
+kind create cluster --name simplerpc
+```
+
+Create the namespace:
+```bash
+kubectl apply -f namespace.yaml
+```
+
+Apply the storage server and service:
+```bash
+kubectl apply -f storage.yaml
+```
+
+Apply the clients:
+```bash
+kubectl apply -f baker.yaml
+kubectl apply -f farmer.yaml
+```
+
+View logs:
+```bash
+kubectl logs -f deployment/storage -n simplerpc
+kubectl logs -f deployment/baker -n simplerpc
+kubectl logs -f deployment/farmer -n simplerpc
+```
+
+Remove the application namespace:
+```bash
+kubectl delete namespace simplerpc
+```
+
+Delete the local kind cluster:
+```bash
+kind delete cluster --name simplerpc
+```
+
+## Run with Terraform
+
+If kind cluster doesn't exists, create it:
+```bash
+kind create cluster --name simplerpc
+```
+
+Open the Terraform folder:
+```bash
+cd .\terraform
+```
+
+Initialize Terraform
+```bash
+terraform init
+```
+
+Format and validate
+```bash
+terraform fmt
+terraform validate
+```
+
+Preview changes:
+```bash
+terraform plan
+```
+
+Apply configuration:
+```bash
+terraform apply
+```
+
+Check Kubernetes resources:
+```bash
+kubectl get all -n simplerpc-tf
+```
+
+View application logs:
+```bash
+kubectl logs -f deployment/storage -n simplerpc-tf
+kubectl logs -f deployment/baker -n simplerpc-tf
+kubectl logs -f deployment/farmer -n simplerpc-tf
+```
+
+To stop the Terraform-managed application:
+```bash
+terraform destroy
+```
+
 ## Project Status
 
 Currently supported:
