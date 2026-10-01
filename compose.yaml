@@ -1,22 +1,16 @@
 services:
   storage:
-    build:
-      context: .
-      dockerfile: Storage/Dockerfile
+    image: jaguanas/simplerpc-storage:0.1.0
     ports:
       - "5000:5000"
   baker:
-    build: 
-      context: .
-      dockerfile: Baker/Dockerfile
+    image: jaguanas/simplerpc-baker:0.1.0
     environment:
       STORAGE_URL: http://storage:5000/simplerpc
     depends_on:
       - storage
   farmer:
-    build: 
-      context: .
-      dockerfile: Farmer/Dockerfile
+    image: jaguanas/simplerpc-farmer:0.1.0
     environment:
       STORAGE_URL: http://storage:5000/simplerpc
     depends_on:
