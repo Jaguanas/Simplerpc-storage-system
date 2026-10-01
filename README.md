@@ -63,47 +63,6 @@ Inside the Docker network, clients connect to Storage using:
 ```bash
 http://storage:5000/simplerpc
 ```
-## Run with Kubernetes
-
-Create the kind cluster:
-```bash
-kind create cluster --name simplerpc
-```
-
-Apply Kubernetes resources in order:
-```bash
-kubectl apply -f .\k8s\namespace.yaml
-kubectl apply -f .\k8s\storage.yaml
-kubectl apply -f .\k8s\baker.yaml
-kubectl apply -f .\k8s\farmer.yaml
-```
-
-Check the results:
-```bash
-kubectl get all -n simplerpc
-```
-
-Check application logs:
-```bash
-kubectl logs -f deployment/storage -n simplerpc
-kubectl logs -f deployment/baker -n simplerpc
-kubectl logs -f deployment/farmer -n simplerpc
-```
-
-To stop application but keep Kubernetes resources:
-```bash
-kubectl scale deployment --all --replicas=0 -n simplerpc
-```
-
-Delete application resources:
-```bash
-kubectl delete namespace simplerpc
-```
-
-Delete the entire cluster:
-```bash
-kind delete cluster --name simplerpc
-```
 
 ## Project Status
 
